@@ -18,12 +18,19 @@ var pluckFirstLineFromFileAsync = function(filePath, err) {
       const line = data.split('\n')[0];
       resolve(line);
     });
-  }).catch(err);
+  });
 };
 
 // This function should retrieve the status code of a GET request to `url`
 var getStatusCodeAsync = function(url) {
-  // TODO
+  return new Promise((resolve, reject) => {
+    request(url, (err, res, body) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(res.statusCode);
+    }); 
+  });
 };
 
 // Export these functions so we can test them and reuse them in later exercises
